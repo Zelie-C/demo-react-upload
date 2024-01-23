@@ -14,7 +14,7 @@
 
 ### Étape 1 : Création du bouton pour déposer un fichier
 
-Sur la page Contact, il y a un formulaire dans lequel nous allons ajouter une nouvelle entrée (une nouvelle balise <input>) entre le message et le boutton d'envoi.
+Sur la page Contact, il y a un formulaire dans lequel nous allons ajouter une nouvelle entrée (une nouvelle balise <input>) entre le message et le bouton d'envoi.
 
 ```html
 <input id="image" type="file" name="image" />
