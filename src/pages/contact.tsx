@@ -21,14 +21,22 @@ function Contact() {
 
   async function handleOnSubmit(e: React.SyntheticEvent) {
     e.preventDefault();
-    if (typeof file === "undefined") return;
+    // if (typeof file === "undefined") return;
 
-    const formData= new FormData();
+    // const formData= new FormData();
 
-    formData.append("file", file);
-    formData.append("upload_preset", "ugp1qoxq");
-    formData.append("api_key", import.meta.env.VITE_CLOUDINARY_API_KEY);
+    // formData.append("file", file);
+    // formData.append("upload_preset", "ugp1qoxq");
+    // formData.append("api_key", import.meta.env.VITE_CLOUDINARY_API_KEY);
 
+    if ( typeof acceptedFiles[0] === 'undefined' ) return;
+
+    const formData = new FormData();
+
+    formData.append('file', acceptedFiles[0]);
+    formData.append('upload_preset', '<Your Upload Preset>');
+    formData.append('api_key', import.meta.env.VITE_CLOUDINARY_API_KEY);
+    
     try {
       const response = await fetch(`https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
       {
@@ -69,10 +77,13 @@ function Contact() {
     file.readAsDataURL(acceptedFiles[0])
   }, []) 
   
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({
-    onDrop,
-   });
+  const { acceptedFiles, getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop
+  });
 
+
+  console.log(file)
+  
   return (
     <Layout>
 
@@ -99,17 +110,18 @@ function Contact() {
 
           <FormRow className="mb-5">
             <FormLabel htmlFor="message">File</FormLabel>
-            <input id="image" name="image" type="file" accept="image/png, image/jpg" onChange={handleOnChange}/>
+            {/* <input id="image" name="image" type="file" accept="image/png, image/jpg" onChange={handleOnChange}/>
             {preview && (
               <p><img src={preview as string} alt="Aperçu du téléchargement" /></p>
-            )}
-            <div {...getRootProps()}>
-              <input {...getInputProps()} />
+            )} */}
+            <div {...getRootProps()} >
+              <input {...getInputProps()} onChange={handleOnChange} />
               {isDragActive ? (
                 <p>Déposez les fichiers ici...</p>
               ) : (
                 <p>
                   Faites glisser des fichiers ici, ou cliquez pour sélectionner des fichiers
+                  {preview && (<img src={preview as string} alt="Apeçu du téléchargement" />)}
                 </p>
               )}
             </div>
