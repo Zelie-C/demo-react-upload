@@ -32,4 +32,4 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/testci:latest-${{ github.ref_name }}
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/render-test:latest-${{ github.ref_name }}
